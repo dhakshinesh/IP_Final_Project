@@ -1,22 +1,32 @@
 from setup import *
 from admin_login import *
+import Matplotlib
 import math
+
+def graph():
+    Matplotlib.Graph_1()
 
 def Menu_btn_clicked(page):
     page_indicator.config(text=page)
     Admin_page = ".!frame"
-    Library_info_page = ".!frame3"
-    Book_showcase_page = ".!frame4"
-    Admin_login_page = ".!frame5"
+    Library_info_page = ".!frame5"
+    Book_showcase_page = ".!frame6"
+    Admin_login_page = ".!frame3"
+    Admin_page_contents= ".!frame2"
     
+    if page == "Demographics":
+        graph()
     if page == "Admin":
-        page = Admin_page
+        page = Admin_login_page
     if page == "My Library":
+        page = Library_info_page
+    if page == "Demographics":
         page = Library_info_page
     for frames in window.winfo_children():
         if str(frames) == page:
+            print(frames)
             frames.pack(side=RIGHT)
-        elif str(frames) in [Admin_page, Library_info_page,Book_showcase_page,Admin_login_page]:
+        elif str(frames) in [Admin_page, Library_info_page,Book_showcase_page,Admin_login_page,Admin_page_contents]:
             frames.pack_forget()
         else:
             print(frames)
@@ -110,7 +120,6 @@ def category_page_contents(category_organised,current_category_page_pos,location
                 x += 294
         else:
             break
-
 def Book_showcase_btn_clicked():
     print("Button Clicked")
 
@@ -155,7 +164,7 @@ page_indicator = Label(Menu_bar, text="Home",bg="#027BD3",font=("Arial", 18),fg=
 page_indicator.place(x=14,y=30)
 
 inactive_btn_img = PhotoImage(file = f"Assets\Menu_bar\inactive_btn_img.png")
-pages = ["Admin","My Library","Student","Demographics"]
+pages = ["Admin","My Library","Demographics"]
 x,y = 14,140
 
 for page in pages:
